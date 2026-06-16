@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { video_api } from './constants';
-import VideoCard from './VideoCard';
+import VideoCard ,{Ad}from './VideoCard';
+import { Link } from "react-router-dom";
 
 export const VideoContainer = () => {
   const [videos,setVideos]=useState([]);
@@ -14,8 +15,14 @@ export const VideoContainer = () => {
     setVideos(json.items);
   }
   return (
-    <div>
-      <VideoCard info={videos[0]}/>
+    <div className='flex m-5 justify-centre flex-wrap'>
+    {videos[0] && <Ad info={videos[0]}/>}  
+      {videos.map((video)=>(
+        <Link to={`/watch?v=${video.id}`}>
+         <VideoCard key={video.id} info={video}/>
+        </Link>
+       
+        ))}
     </div>
   )
 }
