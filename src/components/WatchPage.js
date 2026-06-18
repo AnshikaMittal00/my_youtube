@@ -4,6 +4,7 @@ import { closeMenu } from '../utils/appSlice';
 import { useSearchParams } from 'react-router-dom';
 import useComments from '../utils/useComments';
 import Comment from './Comment';
+import CommentContainer from './CommentContainer';
 const WatchPage = () => {
   const [searchParams]=useSearchParams();
   const video_id=searchParams.get("v");
@@ -14,8 +15,8 @@ const WatchPage = () => {
     },[]);
 
   return (
-    <div className='px-5 grid grid-flow-col '>
-        <div className='col-span-3'>
+    <div className='px-5 '>
+        <div className=''>
             <iframe width="1200" height="600" 
       src={"https://www.youtube.com/embed/"+ video_id}
       title="YouTube video player"
@@ -25,7 +26,7 @@ const WatchPage = () => {
         referrerpolicy="strict-origin-when-cross-origin" allowFullScreen></iframe>  
 
         
-        <h1 className='font-bold m-5 f text-xl'>Comments</h1> 
+        {/* <h1 className='font-bold m-5 f text-xl'>Comments</h1> 
                
              {commentsList.map((comment)=>{
                 const{authorDisplayName, textDisplay}=comment.snippet.topLevelComment.snippet;
@@ -35,9 +36,10 @@ const WatchPage = () => {
                name={authorDisplayName} text={textDisplay}  />
                 )
 
-            })}
+            })} */}
             
         </div>
+        <CommentContainer/>
      
     </div>
 
