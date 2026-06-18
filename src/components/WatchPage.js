@@ -5,6 +5,7 @@ import { useSearchParams } from 'react-router-dom';
 import useComments from '../utils/useComments';
 import Comment from './Comment';
 import CommentContainer from './CommentContainer';
+import LiveChat from './LiveChat';
 const WatchPage = () => {
   const [searchParams]=useSearchParams();
   const video_id=searchParams.get("v");
@@ -15,7 +16,8 @@ const WatchPage = () => {
     },[]);
 
   return (
-    <div className='px-5 '>
+    <div className=' w-full '>
+      <div className='px-5 flex w-full'>
         <div className=''>
             <iframe width="1200" height="600" 
       src={"https://www.youtube.com/embed/"+ video_id}
@@ -37,10 +39,14 @@ const WatchPage = () => {
                 )
 
             })} */}
-            
+           
         </div>
-        <CommentContainer/>
-     
+        <div className='w-full  '>
+          <LiveChat/>
+        </div>
+        </div>
+       
+      <CommentContainer/> 
     </div>
 
   )
