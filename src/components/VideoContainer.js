@@ -10,7 +10,6 @@ export const VideoContainer = ({selectedCategory}) => {
   const[nextPageToken,setNextPageToken]=useState("");
   const[loading,setLoading]=useState(false);
   
-  // eslint-disable-next-line react-hooks/exhaustive-deps
   useEffect(()=>{
     const handleScroll=()=>{
     console.log("scrolling");
