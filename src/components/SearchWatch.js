@@ -10,9 +10,7 @@ const SearchWatch = () => {
     const query=searchParam.get("q");
     // eslint-disable-next-line react-hooks/exhaustive-deps
     useEffect(()=>{
-        fetchData();
-    },[query])
-    const fetchData=async()=>{
+       const fetchData=async()=>{
     const data=await fetch(search_videos+"&q="+query);
     const json=await data.json();
     // console.log(json);
@@ -20,6 +18,9 @@ const SearchWatch = () => {
 
 
     }
+        fetchData();
+    },[query])
+   
   return (
     <div>
     {searchVideos.map((item,index)=><Link key={item.id.videoId} to={`/watch?v=${item.id.videoId}`}><SearchVideoCard data={item}/></Link>)}

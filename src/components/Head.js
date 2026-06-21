@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
 import { toggleMenu } from '../utils/appSlice';
@@ -15,22 +16,9 @@ export const Head = () => {
    const dispatch=useDispatch();
   // eslint-disable-next-line react-hooks/exhaustive-deps
   useEffect(()=>{
-    if(searchCache[searchQuery]){
-      setShowSuggestions(searchCache[searchQuery])
-    }
-    else{
-  const timer=setTimeout(()=> getSearchSuggestions(),2000);
-  return()=>{ clearTimeout(timer)}
-
-    }  
-    
-  },[searchQuery]);
-
   const getSearchSuggestions=async()=>{
-     console.log(searchQuery)
   const data= await fetch(search_api+searchQuery);
   const json=await data.json();
-  // console.log(json[1]);
   setSuggestions(json[1]);
   dispatch(cacheApi({
      [searchQuery]:json[1],
@@ -38,6 +26,18 @@ export const Head = () => {
    
   ))
   }
+    if(searchCache[searchQuery]){
+      setSuggestions(searchCache[searchQuery])
+    }
+    else{
+  const timer=setTimeout(()=> getSearchSuggestions(),2000);
+  return()=>{ clearTimeout(timer)}
+
+    }  
+    
+  },[searchQuery,searchCache]);
+
+ 
  
 
   const handletoggle=()=>{

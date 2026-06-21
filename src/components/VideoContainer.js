@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import React, { useEffect, useState } from 'react'
 import { search_videos, video_api } from './constants';
 import VideoCard ,{Ad}from './VideoCard';
@@ -8,19 +9,16 @@ export const VideoContainer = ({selectedCategory}) => {
   const [videos,setVideos]=useState([]);
   const[nextPageToken,setNextPageToken]=useState("");
   const[loading,setLoading]=useState(false);
-  const handleScroll=()=>{
+  
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  useEffect(()=>{
+    const handleScroll=()=>{
     console.log("scrolling");
     if(window.innerHeight+window.scrollY>=document.body.offsetHeight-200){
       fetchMoreVideos();
     }
   }
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  useEffect(()=>{
-    getVideos();
-    window.addEventListener("scroll",handleScroll);
-    return()=>{window.removeEventListener("scroll",handleScroll)}
-  },[selectedCategory]);
-  const getVideos=async()=>{
+    const getVideos=async()=>{
     let data;
     if(selectedCategory==="All"){
         data=await fetch(video_api);
@@ -34,6 +32,11 @@ export const VideoContainer = ({selectedCategory}) => {
     setVideos(json.items);
     setNextPageToken(json.nextPageToken) 
   }
+    getVideos();
+    window.addEventListener("scroll",handleScroll);
+    return()=>{window.removeEventListener("scroll",handleScroll)}
+  },[selectedCategory]);
+
   const fetchMoreVideos=async()=>{
      if(loading || !nextPageToken) return;
      setLoading(true);
