@@ -1,9 +1,8 @@
 import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
 import { toggleMenu } from '../utils/appSlice';
-import { search_api, video_api } from './constants';
+import { search_api } from './constants';
 import { cacheApi } from '../utils/searchSlice';
-import SearchWatch from './SearchWatch';
 import { useNavigate } from 'react-router-dom';
 
 
@@ -14,6 +13,7 @@ export const Head = () => {
   const[showSuggestions,setShowSuggestions]=useState(false);
   const searchCache=useSelector(store=>store.search)
    const dispatch=useDispatch();
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   useEffect(()=>{
     if(searchCache[searchQuery]){
       setShowSuggestions(searchCache[searchQuery])

@@ -14,6 +14,7 @@ export const VideoContainer = ({selectedCategory}) => {
       fetchMoreVideos();
     }
   }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   useEffect(()=>{
     getVideos();
     window.addEventListener("scroll",handleScroll);
@@ -21,7 +22,7 @@ export const VideoContainer = ({selectedCategory}) => {
   },[selectedCategory]);
   const getVideos=async()=>{
     let data;
-    if(selectedCategory=="All"){
+    if(selectedCategory==="All"){
         data=await fetch(video_api);
     }
     else{
@@ -79,7 +80,7 @@ export const VideoContainer = ({selectedCategory}) => {
           <VideoCard info={video} />
         </Link>
       ))}
-      {selectedCategory!="All"&&videos.map((video) => (
+      {selectedCategory!=="All"&&videos.map((video) => (
         <Link
           key={video.id.videoId}
           to={`/watch?v=${video.id.videoId}`}

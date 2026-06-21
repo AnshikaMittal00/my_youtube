@@ -2,25 +2,23 @@ import React, { useEffect } from 'react'
 import { useDispatch } from 'react-redux'
 import { closeMenu } from '../utils/appSlice';
 import { useSearchParams } from 'react-router-dom';
-import useComments from '../utils/useComments';
-import Comment from './Comment';
 import CommentContainer from './CommentContainer';
 import LiveChat from './LiveChat';
 const WatchPage = () => {
   const [searchParams]=useSearchParams();
   const video_id=searchParams.get("v");
-  const [commentsList]=useComments(video_id);
+  
     const dispatch=useDispatch();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     useEffect(()=>{
         dispatch(closeMenu());
-    },[]);
+    },[dispatch]);
 
   return (
   <div className="w-full px-4 md:px-6 py-4">
 
     <div className="flex flex-col xl:flex-row gap-6">
 
-      {/* Video Section */}
       <div className="flex-1">
 
         <div className="overflow-hidden rounded-2xl shadow-lg">
@@ -37,7 +35,7 @@ const WatchPage = () => {
 
       </div>
 
-      {/* Live Chat */}
+   
       <div className="xl:w-[380px] w-full">
         <div className="rounded-2xl shadow-lg border border-gray-200 overflow-hidden bg-white">
           <div className="px-4 py-3 border-b font-semibold">
@@ -50,7 +48,7 @@ const WatchPage = () => {
 
     </div>
 
-    {/* Comments */}
+  
     <div className="mt-8">
       <h2 className="text-2xl font-bold mb-4">
         Comments

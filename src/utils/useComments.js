@@ -1,9 +1,10 @@
-import React, { useEffect, useState } from 'react'
+import  { useEffect, useState } from 'react'
 import { comment_api } from '../components/constants'
 
 
 const useComments = (vedio_id) => {
     const[commentsList,setcommentsList]=useState([]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     useEffect(()=>{
       commentApi();
     },[])

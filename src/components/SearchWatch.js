@@ -1,6 +1,6 @@
 import React, { useEffect,useState } from 'react'
 import { useSearchParams } from 'react-router-dom'
-import { search_videos, video_api } from './constants';
+import { search_videos} from './constants';
 import SearchVideoCard from './SearchVideoCard';
 import { Link } from 'react-router-dom';
 
@@ -8,6 +8,7 @@ const SearchWatch = () => {
     const [searchParam]=useSearchParams();
     const[searchVideos,setSearchVideos]=useState([]);
     const query=searchParam.get("q");
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     useEffect(()=>{
         fetchData();
     },[query])

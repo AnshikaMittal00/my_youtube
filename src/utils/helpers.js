@@ -62,7 +62,7 @@ var count = 0
         }
         if (count === num) {
             return i
-            break
+           
         } 
     }
     return count;

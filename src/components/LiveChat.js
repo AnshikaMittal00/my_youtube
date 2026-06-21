@@ -9,6 +9,7 @@ const LiveChat = () => {
     const [input,setInput]=useState("");
     const ChatMessages=useSelector(store=>store.chat.messages)
     const dispatch=useDispatch();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     useEffect(()=>{
        const i= setInterval(()=>{
           console.log("Api polling")
@@ -18,7 +19,7 @@ const LiveChat = () => {
     }))
         },500);
         return(()=>clearInterval(i));
-    },[]);
+    },[dispatch]);
   
   return (
     <div>
