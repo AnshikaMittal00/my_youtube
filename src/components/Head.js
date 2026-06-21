@@ -1,10 +1,14 @@
 import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
 import { toggleMenu } from '../utils/appSlice';
-import { search_api } from './constants';
+import { search_api, video_api } from './constants';
 import { cacheApi } from '../utils/searchSlice';
+import SearchWatch from './SearchWatch';
+import { useNavigate } from 'react-router-dom';
+
 
 export const Head = () => {
+  const navigate=useNavigate();
   const[searchQuery,setSearchQuery]=useState("");
   const[suggestions,setSuggestions]=useState([]);
   const[showSuggestions,setShowSuggestions]=useState(false);
@@ -15,7 +19,7 @@ export const Head = () => {
       setShowSuggestions(searchCache[searchQuery])
     }
     else{
-  const timer=setTimeout(()=> getSearchSuggestions(),3000);
+  const timer=setTimeout(()=> getSearchSuggestions(),2000);
   return()=>{ clearTimeout(timer)}
 
     }  
@@ -35,49 +39,89 @@ export const Head = () => {
   ))
   }
  
+
   const handletoggle=()=>{
   dispatch(toggleMenu());
   };
-  return (
-    <><div className='grid  grid-flow-col p-5 m-2 shadow-lg'>
-       <div className='flex col-span-1' >
-      <img 
-      onClick={()=>{handletoggle()}}
-      className='h-8 cursor-pointer'
-      alt="menu"
-        src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTZfphZIa7OK6g-U7p9ZTWyj6fh4TzL-O2A65OtKHMQqQ&s=10"></img>
-      <img 
-      className='h-10 mx-2'
-       alt="logo"
-        src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQoqz_-dfxxbIv3QkIavHIgnXScuA8sGLliJDGG56nhkYQJ2ZhWpxNJY-c&s=10"></img>
-    </div>
-    <div className='col-span-10 relative'>
-    <div className=''>
-      <input type="text" value={searchQuery} className=' border border-gray-400 rounded-l-full w-1/2 mx-auto pl-4 ' 
-    onChange={(e)=>setSearchQuery(e.target.value)}
-    onFocus={()=>setShowSuggestions(true)}
-    onBlur={()=>setShowSuggestions(false)}
-    
-    />
-    <button className=' border border-gray-800 px-5  rounded-r-full bg-gray-100'>
-      🔍
-      </button>
-       {showSuggestions&&<div className='absolute bg-white py-2 px-5 w-[10rem] md:w-[37rem] sm:w-[20rem] rounded-lg shadow-xl border border-gray-100 '>
-        <ul>
-          {suggestions && suggestions.map((s)=>(<li key={s} className='hover:bg-gray-100 py-2 rounded-lg cursor-pointer'>{s}</li>))}
-        </ul>
-      </div>
-}
-    </div>
+return (
+  <>
+    <div className="sticky top-0 z-50 bg-white shadow-md px-4 py-3">
+      <div className="flex items-center justify-between gap-4">
+
        
+        <div className="flex items-center gap-3">
+          <img
+            onClick={handletoggle}
+            className="h-7 w-7 cursor-pointer hover:scale-110 transition"
+            alt="menu"
+            src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTZfphZIa7OK6g-U7p9ZTWyj6fh4TzL-O2A65OtKHMQqQ&s=10"
+          />
+
+         <img
+  className="h-6 md:h-8 cursor-pointer"
+  alt="logo"
+  src="https://www.gstatic.com/youtube/img/branding/youtubelogo/svg/youtubelogo.svg"
+/>
+        </div>
+
+    
+        <div className="flex-1 flex justify-center relative">
+          <div className="w-full max-w-2xl flex">
+
+            <input
+              type="text"
+              value={searchQuery}
+              className="w-full border border-gray-300 rounded-l-full px-5 py-2 outline-none focus:ring-2 focus:ring-blue-500"
+              onChange={(e) => setSearchQuery(e.target.value)}
+              onFocus={() => setShowSuggestions(true)}
+              onBlur={() => {
+                setTimeout(() => {
+                  setShowSuggestions(false);
+                }, 2000);
+              }}
+              placeholder="Search"
+            />
+
+            <button
+              className="border border-gray-300 px-6 rounded-r-full bg-gray-100 hover:bg-gray-200 transition"
+              onClick={() => navigate(`/search?q=${searchQuery}`)}
+            >
+              🔍
+            </button>
+          </div>
+
+          {showSuggestions && (
+            <div className="absolute top-12 w-full max-w-2xl bg-white rounded-xl shadow-2xl border border-gray-200 overflow-hidden">
+              <ul>
+                {suggestions &&
+                  suggestions.map((s) => (
+                    <li
+                      key={s}
+                      className="px-5 py-3 hover:bg-gray-100 cursor-pointer transition"
+                      onClick={() => {
+                        setSearchQuery(s);
+                        navigate(`/search?q=${s}`);
+                      }}
+                    >
+                      🔍 {s}
+                    </li>
+                  ))}
+              </ul>
+            </div>
+          )}
+        </div>
+
+    
+        <div>
+          <img
+            alt="user"
+            className="h-10 w-10 rounded-full border border-gray-300 cursor-pointer hover:scale-105 transition"
+            src="https://images.rawpixel.com/image_png_800/cHJpdmF0ZS9sci9pbWFnZXMvd2Vic2l0ZS8yMDIzLTAxL3JtNjA5LXNvbGlkaWNvbi13LTAwMi1wLnBuZw.png"
+          />
+        </div>
+
+      </div>
     </div>
-    <div className='col-span-1'>
-      <img alt="user"
-       className='h-8'
-      src="https://images.rawpixel.com/image_png_800/cHJpdmF0ZS9sci9pbWFnZXMvd2Vic2l0ZS8yMDIzLTAxL3JtNjA5LXNvbGlkaWNvbi13LTAwMi1wLnBuZw.png"/>
-    </div>
-    </div>
-   
-    </>
-  )
+  </>
+);
 }

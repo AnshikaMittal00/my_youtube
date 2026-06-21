@@ -16,40 +16,53 @@ const WatchPage = () => {
     },[]);
 
   return (
-    <div className=' w-full '>
-      <div className='px-5 flex w-full'>
-        <div className=''>
-            <iframe width="1200" height="600" 
-      src={"https://www.youtube.com/embed/"+ video_id}
-      title="YouTube video player"
-       frameoBrder="0" 
-       allow="accelerometer;
-        autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-        referrerpolicy="strict-origin-when-cross-origin" allowFullScreen></iframe>  
+  <div className="w-full px-4 md:px-6 py-4">
 
-        
-        {/* <h1 className='font-bold m-5 f text-xl'>Comments</h1> 
-               
-             {commentsList.map((comment)=>{
-                const{authorDisplayName, textDisplay}=comment.snippet.topLevelComment.snippet;
-                return(
-              <Comment
-              key={comment.id}
-               name={authorDisplayName} text={textDisplay}  />
-                )
+    <div className="flex flex-col xl:flex-row gap-6">
 
-            })} */}
-           
+      {/* Video Section */}
+      <div className="flex-1">
+
+        <div className="overflow-hidden rounded-2xl shadow-lg">
+          <iframe
+            className="w-full aspect-video"
+            src={"https://www.youtube.com/embed/" + video_id}
+            title="YouTube video player"
+            frameBorder="0"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+            referrerPolicy="strict-origin-when-cross-origin"
+            allowFullScreen
+          ></iframe>
         </div>
-        <div className='w-full  '>
-          <LiveChat/>
+
+      </div>
+
+      {/* Live Chat */}
+      <div className="xl:w-[380px] w-full">
+        <div className="rounded-2xl shadow-lg border border-gray-200 overflow-hidden bg-white">
+          <div className="px-4 py-3 border-b font-semibold">
+            Live Chat
+          </div>
+
+          <LiveChat />
         </div>
-        </div>
-       
-      <CommentContainer/> 
+      </div>
+
     </div>
 
-  )
+    {/* Comments */}
+    <div className="mt-8">
+      <h2 className="text-2xl font-bold mb-4">
+        Comments
+      </h2>
+
+      <div className="bg-white rounded-2xl shadow-md p-4">
+        <CommentContainer />
+      </div>
+    </div>
+
+  </div>
+);
 }
 
 export default WatchPage

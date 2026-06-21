@@ -27,14 +27,18 @@ const LiveChat = () => {
       {ChatMessages.map((c,index)=> <ChatMessage key={index} name={c.name} message={c.message}/>)}  
        
         </div>
-        <form className='w-full p-2 ml-2 flex' onSubmit={(e)=>
-        e.preventDefault(),
-        dispatch(addMessage({
-            name:"Anshika",
-            message:input
-        })),
-        setInput("")
-        
+        <form className='w-full p-2 ml-2 flex'onSubmit={(e) => {
+  e.preventDefault();
+
+  dispatch(
+    addMessage({
+      name: "Anshika",
+      message: input,
+    })
+  );
+
+  setInput("");
+}
         }
         >
         <input className='w-96 px-2 mx-1 border border-black rounded-lg' type="text" value={input} onChange={(e)=>setInput(e.target.value)}></input>

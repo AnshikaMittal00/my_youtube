@@ -40,3 +40,30 @@ export function generateText(length) {
     return result;
 }
 
+// Source - https://stackoverflow.com/q/29091452
+// Posted by Anthony 
+// Retrieved 2026-06-20, License - CC BY-SA 3.0
+
+function Prime(num) {
+let output = true  
+    for (let i=2 ; i<num ; i++) {
+        if (num%i === 0)  {
+           output = false ; break
+        }
+    }
+return output
+}
+
+export function PrimeMover(num) {
+var count = 0
+    for (let i=2 ; i<num ; i++)  {
+        if (Prime(i) === true) {
+            count = count + 1 
+        }
+        if (count === num) {
+            return i
+            break
+        } 
+    }
+    return count;
+}
