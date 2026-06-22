@@ -55,6 +55,11 @@ export const VideoContainer = ({selectedCategory}) => {
     );
   }
     const json=await data.json();
+  if (json.error) {
+  console.log(json.error.message);
+  setLoading(false);
+  return;
+   }
 
     setVideos((prev)=>[...prev,...json.items]);
     setNextPageToken(json.nextPageToken);
