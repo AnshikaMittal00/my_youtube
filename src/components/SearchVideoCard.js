@@ -1,6 +1,8 @@
 import React from 'react'
 
+
 const SearchVideoCard = ({data}) => {
+
    console.log(data);
         if (!data) return <div>Loading...</div>;
       const{snippet }=data;
@@ -27,6 +29,7 @@ const SearchVideoCard = ({data}) => {
       {snippet.description}
     </p>
   </div>
+
 </div>
   )
 }

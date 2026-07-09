@@ -9,10 +9,13 @@ export const VideoContainer = ({selectedCategory}) => {
   const [videos,setVideos]=useState([]);
   const[nextPageToken,setNextPageToken]=useState("");
   const[loading,setLoading]=useState(false);
+ 
   
   useEffect(()=>{
-    const handleScroll=()=>{
+   
+      const handleScroll=()=>{
     console.log("scrolling");
+    console.log({nextPageToken});
     if(window.innerHeight+window.scrollY>=document.body.offsetHeight-200){
       fetchMoreVideos();
     }
@@ -37,6 +40,7 @@ export const VideoContainer = ({selectedCategory}) => {
   },[selectedCategory]);
 
   const fetchMoreVideos=async()=>{
+    
      if(loading || !nextPageToken) return;
      setLoading(true);
       let data;

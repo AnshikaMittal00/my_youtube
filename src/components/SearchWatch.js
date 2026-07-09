@@ -24,6 +24,7 @@ const SearchWatch = () => {
   return (
     <div>
     {searchVideos.map((item,index)=><Link key={item.id.videoId} to={`/watch?v=${item.id.videoId}`}><SearchVideoCard data={item}/></Link>)}
+    
       
     </div>
   )
